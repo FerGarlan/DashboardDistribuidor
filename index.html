@@ -1,376 +1,392 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resumen Ejecutivo Ventas Simply Assistance</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #020617; 
-            color: #f1f5f9; 
-            margin: 0;
-        }
-        
-        .card { 
-            background: #0f172a; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px -12px rgba(0,0,0,0.5); 
-            padding: 1.5rem; 
-            border: 1px solid #1e293b; 
-        }
-        
-        .kpi-card { 
-            border-left: 6px solid #3b82f6; 
-            transition: all 0.3s ease; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            min-height: 140px; 
-        }
-        
-        .kpi-card:hover { 
-            transform: translateY(-4px); 
-            background: #1e293b;
-        }
-        
-        .kpi-title { 
-            font-size: 0.75rem; 
-            font-weight: 800; 
-            color: #94a3b8; 
-            text-transform: uppercase; 
-            letter-spacing: 0.1em; 
-            margin-bottom: 0.75rem; 
-        }
-        
-        .kpi-value { 
-            font-size: 2.25rem; 
-            font-weight: 900; 
-            color: #ffffff; 
-            line-height: 1; 
-        }
-        
-        .kpi-subtext { 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            color: #64748b; 
-            margin-top: 0.5rem; 
-        }
-        
-        .dropzone { 
-            border: 2px dashed #334155; 
-            transition: all 0.3s ease; 
-            cursor: pointer; 
-            background: #0f172a; 
-            color: #94a3b8;
-        }
-        
-        .dropzone:hover { 
-            border-color: #3b82f6; 
-            background-color: #1e293b; 
-            color: #ffffff; 
-        }
-        
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1em;
-        }
-
-        .border-neta { border-left-color: #3b82f6; }
-        .border-contrib { border-left-color: #10b981; }
-        .border-costo { border-left-color: #94a3b8; }
-        .border-tpa { border-left-color: #ef4444; }
-        .border-unit { border-left-color: #a855f7; }
-        .border-ticket { border-left-color: #f97316; }
-        .border-vouchers { border-left-color: #0ea5e9; }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {font: 16.0px 'Lucida Grande'; font-kerning: none}
+  </style>
 </head>
 <body>
-
-    <div class="min-h-screen flex">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-slate-950 border-r border-slate-900 hidden md:flex flex-col text-white">
-            <div class="p-8 border-b border-slate-900 text-center">
-                <h1 class="text-2xl font-black text-blue-500 tracking-tighter">Garlan</h1>
-                <p class="text-[10px] text-slate-500 mt-1 uppercase tracking-[0.2em] font-bold">Business Intelligence</p>
-            </div>
-            <nav class="flex-1 mt-8 px-4">
-                <div class="px-4 py-3 bg-blue-600/10 rounded-xl border-l-4 border-blue-500 text-blue-400 flex items-center mb-2">
-                    <span class="text-xs font-bold uppercase tracking-wider">Dashboard de Ventas</span>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Contenido -->
-        <main class="flex-1 p-8 lg:p-12 overflow-y-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-                <div>
-                    <h2 class="text-4xl font-black text-white tracking-tight leading-tight">Resumen Ejecutivo Ventas<br>Simply Assistance</h2>
-                    <p class="text-slate-400 text-xl mt-2 font-medium">Análisis de Ventas, Rentabilidad y Operación</p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                    <div class="relative min-w-[200px]">
-                        <label class="absolute -top-2 left-3 bg-[#020617] px-1 text-[10px] font-bold text-slate-500 uppercase tracking-widest z-10">Período</label>
-                        <select id="periodFilter" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm font-bold text-slate-200 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer disabled:opacity-50" disabled>
-                            <option value="all">Todo el Histórico</option>
-                            <option value="12">Últimos 12 Meses</option>
-                            <option value="6">Últimos 6 Meses</option>
-                            <option value="3">Últimos 3 Meses</option>
-                            <option value="1">Último Mes</option>
-                        </select>
-                    </div>
-                    <div id="dropzone" class="dropzone px-6 py-3 rounded-xl flex flex-col items-center justify-center text-sm font-bold min-w-[240px] shadow-sm">
-                        <input type="file" id="csvInput" accept=".csv" class="hidden">
-                        <div id="uploadText">Cargar Archivo CSV</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- KPIs -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div class="card kpi-card border-blue-900">
-                    <div class="kpi-title">Ventas Brutas (PVP)</div>
-                    <div id="kpi-pvp" class="kpi-value">$0</div>
-                    <div class="kpi-subtext">Ingreso Total Bruto</div>
-                </div>
-                <div class="card kpi-card border-neta">
-                    <div class="kpi-title">Ventas Netas</div>
-                    <div id="kpi-neta" class="kpi-value text-blue-400">$0</div>
-                    <div id="kpi-perc-neta" class="kpi-subtext">0% s/ PVP</div>
-                </div>
-                <div class="card kpi-card border-contrib" style="background: linear-gradient(to bottom right, #064e3b20, #0f172a);">
-                    <div class="kpi-title" style="color: #10b981;">Contribución Bruta</div>
-                    <div id="kpi-contrib" class="kpi-value text-emerald-400">$0</div>
-                    <div id="kpi-perc" class="font-bold text-emerald-600 mt-1">0% de Margen</div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div class="card kpi-card border-costo">
-                    <div class="kpi-title">Costo Intermediación (POS)</div>
-                    <div id="kpi-costo-pos" class="kpi-value text-slate-400">$0</div>
-                    <div id="kpi-perc-pos" class="font-bold text-slate-600 mt-1 text-sm">0% de PVP</div>
-                </div>
-                <div class="card kpi-card border-tpa" style="background: linear-gradient(to bottom right, #7f1d1d20, #0f172a);">
-                    <div class="kpi-title" style="color: #ef4444;">Costo Asistencia (TPA)</div>
-                    <div id="kpi-tpa" class="kpi-value text-red-500">$0</div>
-                    <div id="kpi-perc-tpa" class="font-bold text-red-700 mt-1 text-sm">0% de PVP</div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="card kpi-card border-ticket">
-                    <div class="kpi-title">Ticket Promedio</div>
-                    <div id="kpi-ticket-prom" class="kpi-value text-orange-400">$0</div>
-                    <div class="kpi-subtext">Venta Neta / Vouchers</div>
-                </div>
-                <div class="card kpi-card border-unit">
-                    <div class="kpi-title">Contribución Unitaria</div>
-                    <div id="kpi-contrib-unit" class="kpi-value text-purple-400">$0</div>
-                    <div class="kpi-subtext">Margen / Vouchers</div>
-                </div>
-                <div class="card kpi-card border-vouchers">
-                    <div class="kpi-title">Volumen Operativo</div>
-                    <div id="kpi-vouchers" class="kpi-value text-sky-400">0</div>
-                    <div class="kpi-subtext">Vouchers Emitidos</div>
-                </div>
-            </div>
-
-            <!-- Gráficos -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                <div class="card">
-                    <h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest">Mix de Productos</h4>
-                    <div class="h-80"><canvas id="productChart"></canvas></div>
-                </div>
-                <div class="card">
-                    <h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest">Distribución País</h4>
-                    <div class="h-80"><canvas id="countryChart"></canvas></div>
-                </div>
-                <div class="card">
-                    <h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest">Ventas por GSA</h4>
-                    <div class="h-80"><canvas id="gsaChart"></canvas></div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest">Evolución Venta Neta</h4>
-                <div class="h-72"><canvas id="trendChart"></canvas></div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        Chart.register(ChartDataLabels);
-        Chart.defaults.color = '#94a3b8';
-        Chart.defaults.borderColor = '#1e293b';
-
-        const dropzone = document.getElementById('dropzone');
-        const csvInput = document.getElementById('csvInput');
-        const uploadText = document.getElementById('uploadText');
-        const periodFilter = document.getElementById('periodFilter');
-        
-        const palette = ['#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a', '#172554', '#0c4a6e', '#075985'];
-        let charts = {};
-        let rawData = [];
-
-        dropzone.onclick = () => csvInput.click();
-        csvInput.onchange = (e) => handleFile(e.target.files[0]);
-        periodFilter.onchange = () => processData(rawData);
-
-        function handleFile(file) {
-            if (!file) return;
-            uploadText.innerText = "Procesando...";
-            Papa.parse(file, {
-                header: true,
-                skipEmptyLines: true,
-                transformHeader: h => h.trim(),
-                complete: function(results) {
-                    rawData = results.data;
-                    periodFilter.disabled = false;
-                    processData(rawData);
-                    uploadText.innerHTML = `<span class="text-blue-400">✓ ${rawData.length.toLocaleString()} registros</span>`;
-                }
-            });
-        }
-
-        function cleanNumber(val) {
-            if (!val) return 0;
-            let str = val.toString().replace(/[$\s]/g, '');
-            if (str.includes(',') && str.includes('.')) {
-                if (str.indexOf(',') < str.indexOf('.')) str = str.replace(/,/g, '');
-                else str = str.replace(/\./g, '').replace(',', '.');
-            } else if (str.includes(',')) str = str.replace(',', '.');
-            return parseFloat(str) || 0;
-        }
-
-        function parseDate(fechaStr) {
-            if (!fechaStr) return null;
-            const sep = fechaStr.includes('-') ? '-' : '/';
-            const parts = fechaStr.split(sep);
-            if (parts.length < 3) return null;
-            return parts[0].length === 4 
-                ? new Date(parts[0], parts[1]-1, parts[2]) 
-                : new Date(parts[2], parts[1]-1, parts[0]);
-        }
-
-        function formatUSD(val) {
-            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
-        }
-
-        function processData(data) {
-            const months = periodFilter.value;
-            let filtered = data;
-
-            let maxDate = null;
-            data.forEach(d => {
-                const dt = parseDate(d['Fecha Emision']);
-                if (dt && (!maxDate || dt > maxDate)) maxDate = dt;
-            });
-
-            if (months !== 'all' && maxDate) {
-                const cutoff = new Date(maxDate);
-                cutoff.setMonth(cutoff.getMonth() - parseInt(months));
-                filtered = data.filter(d => {
-                    const dt = parseDate(d['Fecha Emision']);
-                    return dt && dt >= cutoff;
-                });
-            }
-
-            let neta = 0, pvp = 0, tpa = 0, count = 0;
-            const resP = {}, resG = {}, resPr = {}, resM = new Array(12).fill(0);
-
-            filtered.forEach(d => {
-                const vPvp = cleanNumber(d['Venta PVP Voucher']);
-                const vNeta = cleanNumber(d['Venta Neta Voucher']);
-                const vTpa = cleanNumber(d['Fee TPA Voucher']);
-                const pais = d['Pais POS'] || 'N/D';
-                const gsa = d['GSA'] || 'Directo';
-                const prod = d['Plan Comercial'] || 'Otros';
-
-                count++;
-                neta += vNeta;
-                pvp += vPvp;
-                tpa += vTpa;
-
-                const dt = parseDate(d['Fecha Emision']);
-                if (dt) resM[dt.getMonth()] += vNeta;
-
-                resP[pais] = (resP[pais] || 0) + vNeta;
-                resG[gsa] = (resG[gsa] || 0) + vNeta;
-                resPr[prod] = (resPr[prod] || 0) + vNeta;
-            });
-
-            const contrib = neta - tpa;
-            const cPos = pvp - neta;
-
-            document.getElementById('kpi-pvp').innerText = formatUSD(pvp);
-            document.getElementById('kpi-neta').innerText = formatUSD(neta);
-            document.getElementById('kpi-perc-neta').innerText = pvp > 0 ? ((neta/pvp)*100).toFixed(1) + '% s/ PVP' : '0%';
-            document.getElementById('kpi-contrib').innerText = formatUSD(contrib);
-            document.getElementById('kpi-perc').innerText = neta > 0 ? ((contrib/neta)*100).toFixed(1) + '% de Margen' : '0%';
-            document.getElementById('kpi-costo-pos').innerText = formatUSD(cPos);
-            document.getElementById('kpi-perc-pos').innerText = pvp > 0 ? ((cPos/pvp)*100).toFixed(1) + '% s/ PVP' : '0%';
-            document.getElementById('kpi-tpa').innerText = formatUSD(tpa);
-            document.getElementById('kpi-perc-tpa').innerText = pvp > 0 ? ((tpa/pvp)*100).toFixed(1) + '% s/ PVP' : '0%';
-            document.getElementById('kpi-ticket-prom').innerText = formatUSD(count > 0 ? neta/count : 0);
-            document.getElementById('kpi-contrib-unit').innerText = formatUSD(count > 0 ? contrib/count : 0);
-            document.getElementById('kpi-vouchers').innerText = count.toLocaleString();
-
-            updateChart('productChart', resPr);
-            updateChart('countryChart', resP);
-            updateChart('gsaChart', resG);
-            updateTrend(resM);
-        }
-
-        function updateChart(id, dataMap) {
-            if (charts[id]) charts[id].destroy();
-            const entries = Object.entries(dataMap).sort((a,b) => b[1]-a[1]).slice(0,5);
-            const total = entries.reduce((a,b) => a + b[1], 0);
-
-            charts[id] = new Chart(document.getElementById(id), {
-                type: 'doughnut',
-                data: {
-                    labels: entries.map(e => `${e[0]}: ${total > 0 ? ((e[1]/total)*100).toFixed(1) : 0}%`),
-                    datasets: [{ data: entries.map(e => e[1]), backgroundColor: palette, borderWidth: 2, borderColor: '#0f172a' }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '75%',
-                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 10 } } }, datalabels: { display: false } }
-                }
-            });
-        }
-
-        function updateTrend(data) {
-            if (charts.trend) charts.trend.destroy();
-            charts.trend = new Chart(document.getElementById('trendChart'), {
-                type: 'bar',
-                data: {
-                    labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                    datasets: [{ label: 'Venta Neta', data: data, backgroundColor: '#3b82f6', borderRadius: 6 }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { display: false } },
-                    scales: { 
-                        y: { beginAtZero: true, grid: { color: '#1e293b' }, ticks: { callback: v => '$' + (v >= 1000 ? v/1000 + 'k' : v) } },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-        }
-    </script>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="es"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;title&gt;Resumen Ejecutivo Ventas&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;style&gt;</span></p>
+<p class="p1"><span class="s1">        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&amp;display=swap');</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        body {</span></p>
+<p class="p1"><span class="s1">            font-family: 'Inter', sans-serif;</span></p>
+<p class="p1"><span class="s1">            background-color: #020617;</span></p>
+<p class="p1"><span class="s1">            color: #f1f5f9;</span></p>
+<p class="p1"><span class="s1">            margin: 0;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .card {</span></p>
+<p class="p1"><span class="s1">            background: #0f172a;</span></p>
+<p class="p1"><span class="s1">            border-radius: 20px;</span></p>
+<p class="p1"><span class="s1">            box-shadow: 0 10px 30px -12px rgba(0,0,0,0.5);</span></p>
+<p class="p1"><span class="s1">            padding: 1.5rem;</span></p>
+<p class="p1"><span class="s1">            border: 1px solid #1e293b;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .kpi-card {</span></p>
+<p class="p1"><span class="s1">            border-left: 6px solid #3b82f6;</span></p>
+<p class="p1"><span class="s1">            transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1">            display: flex;</span></p>
+<p class="p1"><span class="s1">            flex-direction: column;</span></p>
+<p class="p1"><span class="s1">            justify-content: center;</span></p>
+<p class="p1"><span class="s1">            min-height: 140px;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .kpi-card:hover {</span></p>
+<p class="p1"><span class="s1">            transform: translateY(-4px);</span></p>
+<p class="p1"><span class="s1">            background: #1e293b;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .kpi-title {</span></p>
+<p class="p1"><span class="s1">            font-size: 0.75rem;</span></p>
+<p class="p1"><span class="s1">            font-weight: 800;</span></p>
+<p class="p1"><span class="s1">            color: #94a3b8;</span></p>
+<p class="p1"><span class="s1">            text-transform: uppercase;</span></p>
+<p class="p1"><span class="s1">            letter-spacing: 0.1em;</span></p>
+<p class="p1"><span class="s1">            margin-bottom: 0.75rem;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .kpi-value {</span></p>
+<p class="p1"><span class="s1">            font-size: 2.25rem;</span></p>
+<p class="p1"><span class="s1">            font-weight: 900;</span></p>
+<p class="p1"><span class="s1">            color: #ffffff;</span></p>
+<p class="p1"><span class="s1">            line-height: 1;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .kpi-subtext {</span></p>
+<p class="p1"><span class="s1">            font-size: 0.85rem;</span></p>
+<p class="p1"><span class="s1">            font-weight: 600;</span></p>
+<p class="p1"><span class="s1">            color: #64748b;</span></p>
+<p class="p1"><span class="s1">            margin-top: 0.5rem;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .dropzone {</span></p>
+<p class="p1"><span class="s1">            border: 2px dashed #334155;</span></p>
+<p class="p1"><span class="s1">            transition: all 0.3s ease;</span></p>
+<p class="p1"><span class="s1">            cursor: pointer;</span></p>
+<p class="p1"><span class="s1">            background: #0f172a;</span></p>
+<p class="p1"><span class="s1">            color: #94a3b8;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        .dropzone:hover {</span></p>
+<p class="p1"><span class="s1">            border-color: #3b82f6;</span></p>
+<p class="p1"><span class="s1">            background-color: #1e293b;</span></p>
+<p class="p1"><span class="s1">            color: #ffffff;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        select {</span></p>
+<p class="p1"><span class="s1">            appearance: none;</span></p>
+<p class="p1"><span class="s1">            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");</span></p>
+<p class="p1"><span class="s1">            background-repeat: no-repeat;</span></p>
+<p class="p1"><span class="s1">            background-position: right 1rem center;</span></p>
+<p class="p1"><span class="s1">            background-size: 1em;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        .border-neta { border-left-color: #3b82f6; }</span></p>
+<p class="p1"><span class="s1">        .border-contrib { border-left-color: #10b981; }</span></p>
+<p class="p1"><span class="s1">        .border-costo { border-left-color: #94a3b8; }</span></p>
+<p class="p1"><span class="s1">        .border-tpa { border-left-color: #ef4444; }</span></p>
+<p class="p1"><span class="s1">        .border-unit { border-left-color: #a855f7; }</span></p>
+<p class="p1"><span class="s1">        .border-ticket { border-left-color: #f97316; }</span></p>
+<p class="p1"><span class="s1">        .border-vouchers { border-left-color: #0ea5e9; }</span></p>
+<p class="p1"><span class="s1">    &lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    &lt;div class="min-h-screen flex"&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;!-- Sidebar --&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;aside class="w-64 bg-slate-950 border-r border-slate-900 hidden md:flex flex-col text-white"&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;div class="p-8 border-b border-slate-900 text-center"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;h1 class="text-2xl font-black text-blue-500 tracking-tighter"&gt;Garlan&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;p class="text-[10px] text-slate-500 mt-1 uppercase tracking-[0.2em] font-bold"&gt;Business Intelligence&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;nav class="flex-1 mt-8 px-4"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="px-4 py-3 bg-blue-600/10 rounded-xl border-l-4 border-blue-500 text-blue-400 flex items-center mb-2"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;span class="text-xs font-bold uppercase tracking-wider"&gt;Dashboard de Ventas&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/nav&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;/aside&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        &lt;!-- Contenido --&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;main class="flex-1 p-8 lg:p-12 overflow-y-auto"&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;h2 class="text-4xl font-black text-white tracking-tight leading-tight"&gt;Resumen Ejecutivo Ventas&lt;br&gt;Simply Assistance&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;p class="text-slate-400 text-xl mt-2 font-medium"&gt;Análisis de Ventas, Rentabilidad y Operación&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="relative min-w-[200px]"&gt;</span></p>
+<p class="p1"><span class="s1">                        &lt;label class="absolute -top-2 left-3 bg-[#020617] px-1 text-[10px] font-bold text-slate-500 uppercase tracking-widest z-10"&gt;Período&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1">                        &lt;select id="periodFilter" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm font-bold text-slate-200 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer disabled:opacity-50" disabled&gt;</span></p>
+<p class="p1"><span class="s1">                            &lt;option value="all"&gt;Todo el Histórico&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1">                            &lt;option value="12"&gt;Últimos 12 Meses&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1">                            &lt;option value="6"&gt;Últimos 6 Meses&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1">                            &lt;option value="3"&gt;Últimos 3 Meses&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1">                            &lt;option value="1"&gt;Último Mes&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1">                        &lt;/select&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="dropzone" class="dropzone px-6 py-3 rounded-xl flex flex-col items-center justify-center text-sm font-bold min-w-[240px] shadow-sm"&gt;</span></p>
+<p class="p1"><span class="s1">                        &lt;input type="file" id="csvInput" accept=".csv" class="hidden"&gt;</span></p>
+<p class="p1"><span class="s1">                        &lt;div id="uploadText"&gt;Cargar Archivo CSV&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            &lt;!-- KPIs --&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-blue-900"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title"&gt;Ventas Brutas (PVP)&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-pvp" class="kpi-value"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-subtext"&gt;Ingreso Total Bruto&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-neta"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title"&gt;Ventas Netas&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-neta" class="kpi-value text-blue-400"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-perc-neta" class="kpi-subtext"&gt;0% s/ PVP&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-contrib" style="background: linear-gradient(to bottom right, #064e3b20, #0f172a);"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title" style="color: #10b981;"&gt;Contribución Bruta&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-contrib" class="kpi-value text-emerald-400"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-perc" class="font-bold text-emerald-600 mt-1"&gt;0% de Margen&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-costo"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title"&gt;Costo Intermediación (POS)&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-costo-pos" class="kpi-value text-slate-400"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-perc-pos" class="font-bold text-slate-600 mt-1 text-sm"&gt;0% de PVP&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-tpa" style="background: linear-gradient(to bottom right, #7f1d1d20, #0f172a);"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title" style="color: #ef4444;"&gt;Costo Asistencia (TPA)&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-tpa" class="kpi-value text-red-500"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-perc-tpa" class="font-bold text-red-700 mt-1 text-sm"&gt;0% de PVP&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-ticket"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title"&gt;Ticket Promedio&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-ticket-prom" class="kpi-value text-orange-400"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-subtext"&gt;Venta Neta / Vouchers&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-unit"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title"&gt;Contribución Unitaria&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-contrib-unit" class="kpi-value text-purple-400"&gt;$0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-subtext"&gt;Margen / Vouchers&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card kpi-card border-vouchers"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-title"&gt;Volumen Operativo&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div id="kpi-vouchers" class="kpi-value text-sky-400"&gt;0&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="kpi-subtext"&gt;Vouchers Emitidos&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            &lt;!-- Gráficos --&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest"&gt;Mix de Productos&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="h-80"&gt;&lt;canvas id="productChart"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest"&gt;Distribución País&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="h-80"&gt;&lt;canvas id="countryChart"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest"&gt;Ventas por GSA&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1">                    &lt;div class="h-80"&gt;&lt;canvas id="gsaChart"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">           </span></p>
+<p class="p1"><span class="s1">            &lt;div class="card"&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;h4 class="font-bold text-slate-400 mb-6 uppercase text-xs tracking-widest"&gt;Evolución Venta Neta&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1">                &lt;div class="h-72"&gt;&lt;canvas id="trendChart"&gt;&lt;/canvas&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;/main&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">    &lt;script&gt;</span></p>
+<p class="p1"><span class="s1">        Chart.register(ChartDataLabels);</span></p>
+<p class="p1"><span class="s1">        Chart.defaults.color = '#94a3b8';</span></p>
+<p class="p1"><span class="s1">        Chart.defaults.borderColor = '#1e293b';</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        const dropzone = document.getElementById('dropzone');</span></p>
+<p class="p1"><span class="s1">        const csvInput = document.getElementById('csvInput');</span></p>
+<p class="p1"><span class="s1">        const uploadText = document.getElementById('uploadText');</span></p>
+<p class="p1"><span class="s1">        const periodFilter = document.getElementById('periodFilter');</span></p>
+<p class="p1"><span class="s1">       </span></p>
+<p class="p1"><span class="s1">        const palette = ['#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a', '#172554', '#0c4a6e', '#075985'];</span></p>
+<p class="p1"><span class="s1">        let charts = {};</span></p>
+<p class="p1"><span class="s1">        let rawData = [];</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        dropzone.onclick = () =&gt; csvInput.click();</span></p>
+<p class="p1"><span class="s1">        csvInput.onchange = (e) =&gt; handleFile(e.target.files[0]);</span></p>
+<p class="p1"><span class="s1">        periodFilter.onchange = () =&gt; processData(rawData);</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function handleFile(file) {</span></p>
+<p class="p1"><span class="s1">            if (!file) return;</span></p>
+<p class="p1"><span class="s1">            uploadText.innerText = "Procesando...";</span></p>
+<p class="p1"><span class="s1">            Papa.parse(file, {</span></p>
+<p class="p1"><span class="s1">                header: true,</span></p>
+<p class="p1"><span class="s1">                skipEmptyLines: true,</span></p>
+<p class="p1"><span class="s1">                transformHeader: h =&gt; h.trim(),</span></p>
+<p class="p1"><span class="s1">                complete: function(results) {</span></p>
+<p class="p1"><span class="s1">                    rawData = results.data;</span></p>
+<p class="p1"><span class="s1">                    periodFilter.disabled = false;</span></p>
+<p class="p1"><span class="s1">                    processData(rawData);</span></p>
+<p class="p1"><span class="s1">                    uploadText.innerHTML = `&lt;span class="text-blue-400"&gt;</span><span class="s2">✓</span><span class="s1"> ${rawData.length.toLocaleString()} registros&lt;/span&gt;`;</span></p>
+<p class="p1"><span class="s1">                }</span></p>
+<p class="p1"><span class="s1">            });</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function cleanNumber(val) {</span></p>
+<p class="p1"><span class="s1">            if (!val) return 0;</span></p>
+<p class="p1"><span class="s1">            let str = val.toString().replace(/[$\s]/g, '');</span></p>
+<p class="p1"><span class="s1">            if (str.includes(',') &amp;&amp; str.includes('.')) {</span></p>
+<p class="p1"><span class="s1">                if (str.indexOf(',') &lt; str.indexOf('.')) str = str.replace(/,/g, '');</span></p>
+<p class="p1"><span class="s1">                else str = str.replace(/\./g, '').replace(',', '.');</span></p>
+<p class="p1"><span class="s1">            } else if (str.includes(',')) str = str.replace(',', '.');</span></p>
+<p class="p1"><span class="s1">            return parseFloat(str) || 0;</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function parseDate(fechaStr) {</span></p>
+<p class="p1"><span class="s1">            if (!fechaStr) return null;</span></p>
+<p class="p1"><span class="s1">            const sep = fechaStr.includes('-') ? '-' : '/';</span></p>
+<p class="p1"><span class="s1">            const parts = fechaStr.split(sep);</span></p>
+<p class="p1"><span class="s1">            if (parts.length &lt; 3) return null;</span></p>
+<p class="p1"><span class="s1">            return parts[0].length === 4</span></p>
+<p class="p1"><span class="s1">                ? new Date(parts[0], parts[1]-1, parts[2])</span></p>
+<p class="p1"><span class="s1">                : new Date(parts[2], parts[1]-1, parts[0]);</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function formatUSD(val) {</span></p>
+<p class="p1"><span class="s1">            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function processData(data) {</span></p>
+<p class="p1"><span class="s1">            const months = periodFilter.value;</span></p>
+<p class="p1"><span class="s1">            let filtered = data;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            let maxDate = null;</span></p>
+<p class="p1"><span class="s1">            data.forEach(d =&gt; {</span></p>
+<p class="p1"><span class="s1">                const dt = parseDate(d['Fecha Emision']);</span></p>
+<p class="p1"><span class="s1">                if (dt &amp;&amp; (!maxDate || dt &gt; maxDate)) maxDate = dt;</span></p>
+<p class="p1"><span class="s1">            });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            if (months !== 'all' &amp;&amp; maxDate) {</span></p>
+<p class="p1"><span class="s1">                const cutoff = new Date(maxDate);</span></p>
+<p class="p1"><span class="s1">                cutoff.setMonth(cutoff.getMonth() - parseInt(months));</span></p>
+<p class="p1"><span class="s1">                filtered = data.filter(d =&gt; {</span></p>
+<p class="p1"><span class="s1">                    const dt = parseDate(d['Fecha Emision']);</span></p>
+<p class="p1"><span class="s1">                    return dt &amp;&amp; dt &gt;= cutoff;</span></p>
+<p class="p1"><span class="s1">                });</span></p>
+<p class="p1"><span class="s1">            }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            let neta = 0, pvp = 0, tpa = 0, count = 0;</span></p>
+<p class="p1"><span class="s1">            const resP = {}, resG = {}, resPr = {}, resM = new Array(12).fill(0);</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            filtered.forEach(d =&gt; {</span></p>
+<p class="p1"><span class="s1">                const vPvp = cleanNumber(d['Venta PVP Voucher']);</span></p>
+<p class="p1"><span class="s1">                const vNeta = cleanNumber(d['Venta Neta Voucher']);</span></p>
+<p class="p1"><span class="s1">                const vTpa = cleanNumber(d['Fee TPA Voucher']);</span></p>
+<p class="p1"><span class="s1">                const pais = d['Pais POS'] || 'N/D';</span></p>
+<p class="p1"><span class="s1">                const gsa = d['GSA'] || 'Directo';</span></p>
+<p class="p1"><span class="s1">                const prod = d['Plan Comercial'] || 'Otros';</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">                count++;</span></p>
+<p class="p1"><span class="s1">                neta += vNeta;</span></p>
+<p class="p1"><span class="s1">                pvp += vPvp;</span></p>
+<p class="p1"><span class="s1">                tpa += vTpa;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">                const dt = parseDate(d['Fecha Emision']);</span></p>
+<p class="p1"><span class="s1">                if (dt) resM[dt.getMonth()] += vNeta;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">                resP[pais] = (resP[pais] || 0) + vNeta;</span></p>
+<p class="p1"><span class="s1">                resG[gsa] = (resG[gsa] || 0) + vNeta;</span></p>
+<p class="p1"><span class="s1">                resPr[prod] = (resPr[prod] || 0) + vNeta;</span></p>
+<p class="p1"><span class="s1">            });</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            const contrib = neta - tpa;</span></p>
+<p class="p1"><span class="s1">            const cPos = pvp - neta;</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-pvp').innerText = formatUSD(pvp);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-neta').innerText = formatUSD(neta);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-perc-neta').innerText = pvp &gt; 0 ? ((neta/pvp)*100).toFixed(1) + '% s/ PVP' : '0%';</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-contrib').innerText = formatUSD(contrib);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-perc').innerText = neta &gt; 0 ? ((contrib/neta)*100).toFixed(1) + '% de Margen' : '0%';</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-costo-pos').innerText = formatUSD(cPos);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-perc-pos').innerText = pvp &gt; 0 ? ((cPos/pvp)*100).toFixed(1) + '% s/ PVP' : '0%';</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-tpa').innerText = formatUSD(tpa);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-perc-tpa').innerText = pvp &gt; 0 ? ((tpa/pvp)*100).toFixed(1) + '% s/ PVP' : '0%';</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-ticket-prom').innerText = formatUSD(count &gt; 0 ? neta/count : 0);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-contrib-unit').innerText = formatUSD(count &gt; 0 ? contrib/count : 0);</span></p>
+<p class="p1"><span class="s1">            document.getElementById('kpi-vouchers').innerText = count.toLocaleString();</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            updateChart('productChart', resPr);</span></p>
+<p class="p1"><span class="s1">            updateChart('countryChart', resP);</span></p>
+<p class="p1"><span class="s1">            updateChart('gsaChart', resG);</span></p>
+<p class="p1"><span class="s1">            updateTrend(resM);</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function updateChart(id, dataMap) {</span></p>
+<p class="p1"><span class="s1">            if (charts[id]) charts[id].destroy();</span></p>
+<p class="p1"><span class="s1">            const entries = Object.entries(dataMap).sort((a,b) =&gt; b[1]-a[1]).slice(0,5);</span></p>
+<p class="p1"><span class="s1">            const total = entries.reduce((a,b) =&gt; a + b[1], 0);</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">            charts[id] = new Chart(document.getElementById(id), {</span></p>
+<p class="p1"><span class="s1">                type: 'doughnut',</span></p>
+<p class="p1"><span class="s1">                data: {</span></p>
+<p class="p1"><span class="s1">                    labels: entries.map(e =&gt; `${e[0]}: ${total &gt; 0 ? ((e[1]/total)*100).toFixed(1) : 0}%`),</span></p>
+<p class="p1"><span class="s1">                    datasets: [{ data: entries.map(e =&gt; e[1]), backgroundColor: palette, borderWidth: 2, borderColor: '#0f172a' }]</span></p>
+<p class="p1"><span class="s1">                },</span></p>
+<p class="p1"><span class="s1">                options: {</span></p>
+<p class="p1"><span class="s1">                    responsive: true,</span></p>
+<p class="p1"><span class="s1">                    maintainAspectRatio: false,</span></p>
+<p class="p1"><span class="s1">                    cutout: '75%',</span></p>
+<p class="p1"><span class="s1">                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 10 } } }, datalabels: { display: false } }</span></p>
+<p class="p1"><span class="s1">                }</span></p>
+<p class="p1"><span class="s1">            });</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1"> </span></p>
+<p class="p1"><span class="s1">        function updateTrend(data) {</span></p>
+<p class="p1"><span class="s1">            if (charts.trend) charts.trend.destroy();</span></p>
+<p class="p1"><span class="s1">            charts.trend = new Chart(document.getElementById('trendChart'), {</span></p>
+<p class="p1"><span class="s1">                type: 'bar',</span></p>
+<p class="p1"><span class="s1">                data: {</span></p>
+<p class="p1"><span class="s1">                    labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],</span></p>
+<p class="p1"><span class="s1">                    datasets: [{ label: 'Venta Neta', data: data, backgroundColor: '#3b82f6', borderRadius: 6 }]</span></p>
+<p class="p1"><span class="s1">                },</span></p>
+<p class="p1"><span class="s1">                options: {</span></p>
+<p class="p1"><span class="s1">                    responsive: true,</span></p>
+<p class="p1"><span class="s1">                    maintainAspectRatio: false,</span></p>
+<p class="p1"><span class="s1">                    plugins: { legend: { display: false }, datalabels: { display: false } },</span></p>
+<p class="p1"><span class="s1">                    scales: {</span></p>
+<p class="p1"><span class="s1">                        y: { beginAtZero: true, grid: { color: '#1e293b' }, ticks: { callback: v =&gt; '$' + (v &gt;= 1000 ? v/1000 + 'k' : v) } },</span></p>
+<p class="p1"><span class="s1">                        x: { grid: { display: false } }</span></p>
+<p class="p1"><span class="s1">                    }</span></p>
+<p class="p1"><span class="s1">                }</span></p>
+<p class="p1"><span class="s1">            });</span></p>
+<p class="p1"><span class="s1">        }</span></p>
+<p class="p1"><span class="s1">    &lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
-
